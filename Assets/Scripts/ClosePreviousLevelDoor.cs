@@ -62,6 +62,8 @@ public class ClosePreviousLevelDoor : MonoBehaviour
 
     void OnCollision(Collision collision)
     {
+        if (!collision.gameObject.CompareTag("Player"))
+            return;
         if (!playerPassed)
         {
             foreach (ContactPoint contact in collision.contacts)

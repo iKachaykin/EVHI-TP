@@ -7,8 +7,7 @@ public class Shoot : MonoBehaviour
     public GameObject missilePrefab;
     public float reloadTime = 0.5f;
     public float reloadProgress = 0f;
-    public float weaponForce = 5000f;
-    public Camera playerCam;
+    public float weaponForce = 2000f;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,12 +18,14 @@ public class Shoot : MonoBehaviour
     void Update()
     {
         reloadProgress += Time.deltaTime;
-        if (Input.GetMouseButtonDown(0) && reloadProgress >= reloadTime)
+        if ((Input.GetMouseButtonDown(0) || Input.GetMouseButton(0)) && reloadProgress >= reloadTime)
         {
+            GameObject weapon = transform.Find("Weapon").gameObject;
+
             GameObject missileInstance;
-            missileInstance = Instantiate<GameObject>(missilePrefab, playerCam.transform.position, playerCam.transform.rotation);
+            missileInstance = Instantiate<GameObject>(missilePrefab, weapon.transform.position, weapon.transform.rotation);
             Rigidbody missileRB = missileInstance.GetComponent<Rigidbody>();
-            missileRB.AddForce(playerCam.transform.up * weaponForce);
+            missileRB.AddForce(weapon.transform.up * weaponForce);
             reloadProgress = 0;
         }
     }

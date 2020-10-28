@@ -43,6 +43,8 @@ public class ActivateNextLevelFloor : MonoBehaviour
 
     void OnCollision(Collision collision)
     {
+        if (!collision.gameObject.CompareTag("Player"))
+            return;
         if (!someoneStepped)
         {
             foreach (ContactPoint contact in collision.contacts)
