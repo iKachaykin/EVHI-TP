@@ -18,7 +18,7 @@ public class ActivateNextLevelButton : MonoBehaviour
 
     void Start()
     {
-        targetButton = new Vector3(transform.position.x, transform.position.y - transform.localScale.y + descentGap, transform.position.z);
+        targetButton = new Vector3(transform.position.x, -transform.localScale.y / 2 + descentGap, transform.position.z);
         targetDoor = new Vector3(door.transform.position.x, door.transform.position.y - door.transform.localScale.y + descentGap, door.transform.position.z);
     }
 
@@ -49,6 +49,8 @@ public class ActivateNextLevelButton : MonoBehaviour
 
     void OnCollision(Collision collision)
     {
+        if (!collision.gameObject.CompareTag("Player"))
+            return;
         if (!someonePressed)
         {
             foreach (ContactPoint contact in collision.contacts)

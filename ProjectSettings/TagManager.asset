@@ -8,6 +8,7 @@ TagManager:
   - OnGame
   - ToDestroy
   - Missile
+  - EnemyParticle
   layers:
   - Default
   - TransparentFX
