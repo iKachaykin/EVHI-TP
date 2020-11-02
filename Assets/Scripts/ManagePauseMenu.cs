@@ -49,9 +49,11 @@ public class ManagePauseMenu : MonoBehaviour
         player.SetActive(true);
         pauseCamera.enabled = false;
         foreach(GameObject g in pauseObjects)
-            g.SetActive(false);
+            if (g != null)
+                g.SetActive(false);
         foreach(GameObject g in onGameObjects)
-            g.SetActive(true);
+            if (g != null)
+                g.SetActive(true);
         Cursor.visible = false;
         onPause = false;
     }
@@ -61,9 +63,11 @@ public class ManagePauseMenu : MonoBehaviour
         pauseCamera.enabled = true;
         player.SetActive(false);
         foreach(GameObject g in onGameObjects)
-            g.SetActive(false);
+            if (g != null)
+                g.SetActive(false);
         foreach(GameObject g in pauseObjects)
-            g.SetActive(true);
+            if (g != null)
+                g.SetActive(true);
         Cursor.visible = true;
         onPause = true;
     }

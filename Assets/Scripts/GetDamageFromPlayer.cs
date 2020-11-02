@@ -21,7 +21,7 @@ public class GetDamageFromPlayer : MonoBehaviour
     void Update()
     {
         if (health.currentHealth != health.maxHealth && health.maxHealth != 0)
-            GetComponent<Renderer>().material.color = new Color(1, (float)health.currentHealth / health.maxHealth, (float)health.currentHealth / health.maxHealth, 1);
+            GetComponent<Renderer>().material.color = new Color(1, (float)health.currentHealth / health.maxHealth, (float)health.currentHealth / health.maxHealth, GetComponent<Renderer>().material.color.a);
         if (health.currentHealth <= 0)
         {
             GenerateParticles();
