@@ -9,6 +9,10 @@ TagManager:
   - ToDestroy
   - Missile
   - EnemyParticle
+  - Islet
+  - Light
+  - LightBoss
+  - PlayerDead
   layers:
   - Default
   - TransparentFX

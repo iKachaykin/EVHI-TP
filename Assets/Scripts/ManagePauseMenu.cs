@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ManagePauseMenu : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class ManagePauseMenu : MonoBehaviour
 
         Button ebtn = ExitButton.GetComponent<Button>();
         ebtn.onClick.AddListener(ExitGame);
+
+        Button rbtn = RestartButton.GetComponent<Button>();
+        rbtn.onClick.AddListener(RestartGame);
 
         Cursor.visible = false;
 
@@ -75,5 +79,10 @@ public class ManagePauseMenu : MonoBehaviour
     void ExitGame()
     {
         Application.Quit();
+    }
+
+    void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
