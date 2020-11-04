@@ -4,46 +4,53 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class ManagePlayerDeath : MonoBehaviour
+public class ManagePlayerWin : MonoBehaviour
 {
-    public GameObject onDeathPanel;
-    public Camera mainCamera, playerDeadCamera;
+    public GameObject winPanel;
+    public Camera mainCamera, playerWinCamera;
     public Button RestartButton, ExitButton;
 
-    private string playerDeadTag = "PlayerDead";
-    private string playerTag = "Player";
-    private Health playerHealth;
-    private float heightLimit = -10;
+    private string playerWinTag = "PlayerWin";
+    private string bossTag = "Boss";
+    private Health bossHealth;
+    private float progress = 0f, lim = 5f;
+    private bool bossHealthAssigned = false;
     // Start is called before the first frame update
     void Start()
     {
-        onDeathPanel.SetActive(false);
+        winPanel.SetActive(false);
 
         Button ebtn = ExitButton.GetComponent<Button>();
         ebtn.onClick.AddListener(ExitGame);
 
         Button rbtn = RestartButton.GetComponent<Button>();
         rbtn.onClick.AddListener(RestartGame);
-
-        playerHealth = GameObject.FindGameObjectWithTag(playerTag).GetComponent<Health>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playerHealth == null || GameObject.FindGameObjectWithTag(playerTag) == null)
+        if (GameObject.FindGameObjectWithTag(bossTag) == null)
             return;
-        if (playerHealth.currentHealth <= 0 || GameObject.FindGameObjectWithTag(playerTag).transform.position.y < heightLimit)
+        else if (!bossHealthAssigned)
         {
+            bossHealth = GameObject.FindGameObjectWithTag(bossTag).GetComponent<Health>();
+            bossHealthAssigned = true;
+        }
+        if(bossHealth.currentHealth <= 0)
+        {
+            progress += Time.deltaTime;
+            if (progress < lim)
+                return;
             GameObject canvas = GameObject.Find("Canvas");
             foreach (Transform child in canvas.transform)
-                if (!child.gameObject.CompareTag(playerDeadTag))
+                if (!child.gameObject.CompareTag(playerWinTag))
                     child.gameObject.SetActive(false);
             GameObject.Find("PauseMenuManager").GetComponent<ManagePauseMenu>().enabled = false;
             mainCamera.enabled = false;
             
-            playerDeadCamera.enabled = true;
-            onDeathPanel.SetActive(true);
+            playerWinCamera.enabled = true;
+            winPanel.SetActive(true);
             Cursor.visible = true;
         }
         

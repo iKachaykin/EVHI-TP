@@ -13,6 +13,9 @@ TagManager:
   - Light
   - LightBoss
   - PlayerDead
+  - BossWeaponShell
+  - PlayerWin
+  - Boss
   layers:
   - Default
   - TransparentFX

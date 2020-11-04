@@ -8,19 +8,23 @@ public class ActivateTheLastLevel : MonoBehaviour
     private bool buttonIsDown = false, levelActivated = false, someonePressed = false;
     private float eps = 0.001f;
     private Vector3 targetButton;
-    private string lightTag = "Light", lightBossTag = "LightBoss";
-    private List<GameObject> lightsToTurnOn;
-
+    private Vector3 bossInitialPosition;
+    private Vector3 bossInitialRotationEuler;
+    
+    public GameObject[] lightsToTurnOn;
     public float downSpeedButton = 0.1f;
     public float descentGap = 0.01f;
     public GameObject spotLight;
+    public GameObject boss;
+    public GameObject bossHealthBar;
     // Start is called before the first frame update
     void Start()
     {
         targetButton = new Vector3(transform.position.x, -transform.localScale.y / 2 + descentGap, transform.position.z);
-        lightsToTurnOn = new List<GameObject>();
-        lightsToTurnOn.AddRange(GameObject.FindGameObjectsWithTag(lightTag));
-        lightsToTurnOn.AddRange(GameObject.FindGameObjectsWithTag(lightBossTag));
+        bossInitialPosition = new Vector3(-27.44f, 10f, -0.51f);
+        bossInitialRotationEuler = new Vector3(0f, 180f, 0f);
+        boss.SetActive(false);
+        bossHealthBar.SetActive(false);
     }
 
     // Update is called once per frame
@@ -39,6 +43,8 @@ public class ActivateTheLastLevel : MonoBehaviour
             foreach(GameObject light in lightsToTurnOn)
                 light.SetActive(true);
             spotLight.SetActive(false);
+            boss.SetActive(true);
+            bossHealthBar.SetActive(true);
             levelActivated = true;
         }
     }
@@ -71,5 +77,10 @@ public class ActivateTheLastLevel : MonoBehaviour
                 }
             }
         }
+    }
+
+    public bool LevelActivated()
+    {
+        return levelActivated;
     }
 }

@@ -35,9 +35,7 @@ public class GetDamageFromPlayer : MonoBehaviour
         if (collision.gameObject.CompareTag(missileTag))
         {
             MissileConfig mc = collision.gameObject.GetComponent<MissileConfig>();
-            health.GetDamage((int)Mathf.Round((1.0f - resistance) * mc.damage));
-            // Debug.Log(health.currentHealth);
-        }
+            health.GetDamage((int)Mathf.Round((1.0f - resistance) * mc.damage));        }
 
     }
 

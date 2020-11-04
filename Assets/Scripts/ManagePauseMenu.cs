@@ -11,6 +11,9 @@ public class ManagePauseMenu : MonoBehaviour
     private bool onPause;
 
     public GameObject player;
+    public GameObject boss;
+    public GameObject bossHealthBar;
+    public GameObject lastLevelButton;
     public Camera pauseCamera;
     public Button ContinueButton, RestartButton, ExitButton;
     // Start is called before the first frame update
@@ -58,6 +61,11 @@ public class ManagePauseMenu : MonoBehaviour
         foreach(GameObject g in onGameObjects)
             if (g != null)
                 g.SetActive(true);
+        if (lastLevelButton.GetComponent<ActivateTheLastLevel>().LevelActivated())
+        {
+            boss.SetActive(true);
+            bossHealthBar.SetActive(true);
+        }
         Cursor.visible = false;
         onPause = false;
     }
@@ -72,6 +80,11 @@ public class ManagePauseMenu : MonoBehaviour
         foreach(GameObject g in pauseObjects)
             if (g != null)
                 g.SetActive(true);
+        if (lastLevelButton.GetComponent<ActivateTheLastLevel>().LevelActivated())
+        {
+            boss.SetActive(false);
+            bossHealthBar.SetActive(false);
+        }
         Cursor.visible = true;
         onPause = true;
     }
