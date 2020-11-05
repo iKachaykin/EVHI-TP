@@ -16,6 +16,7 @@ TagManager:
   - BossWeaponShell
   - PlayerWin
   - Boss
+  - Floor
   layers:
   - Default
   - TransparentFX
