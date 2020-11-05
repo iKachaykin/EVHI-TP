@@ -4,6 +4,5 @@ using UnityEngine;
 
 public class BossWeaponShellConfig : MonoBehaviour
 {
-    [HideInInspector]
     public float damage = 25f;
 }
